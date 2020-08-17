@@ -23,4 +23,5 @@ killasgroup=true
 ; Need to wait for currently executing tasks to finish at shutdown.
 ; Increase this if you have very long running tasks.
 stopwaitsecs = 600
-{% if item.supervisor_environment_dict %}{% for key,value in item.supervisor_environment_dict.items() %}environment={{key}}={{value}}{% endfor %}{% endif %}
+{% for key,value in item.supervisor_environment_dict.items() -%}{{ "%s=%s=%s" | format('environment',key, value) }}
+{% endfor -%}
